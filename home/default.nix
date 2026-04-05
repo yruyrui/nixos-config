@@ -15,6 +15,7 @@
       pkgs.btop
       pkgs.bun
       pkgs.clang
+      pkgs.github-copilot-cli
       pkgs.eza
       pkgs.fastfetch
       pkgs.fd
