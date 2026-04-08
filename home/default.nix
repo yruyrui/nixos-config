@@ -21,6 +21,7 @@
       pkgs.fd
       pkgs.firefox
       pkgs.libnotify
+      pkgs.networkmanagerapplet
       pkgs.ripgrep
       pkgs.rofi
       pkgs.valgrind
