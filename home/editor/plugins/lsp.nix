@@ -18,6 +18,8 @@
         nil_ls.enable = true;
         # Python
         ruff.enable = true;
+        # Tex
+        texlab.enable = true;
         # Zig
         zls.enable = true;
       };

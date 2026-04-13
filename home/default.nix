@@ -24,6 +24,8 @@
       pkgs.networkmanagerapplet
       pkgs.ripgrep
       pkgs.rofi
+      pkgs.texliveFull
+      pkgs.textlint
       pkgs.valgrind
       inputs.zig-overlay.packages.${pkgs.stdenv.hostPlatform.system}.master
     ];
