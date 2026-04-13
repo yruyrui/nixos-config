@@ -1,7 +1,17 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs.nixvim = {
     defaultEditor = true;
+
+    clipboard = {
+      register = "unnamedplus";
+      providers = {
+        wl-copy = {
+          enable = true;
+          package = pkgs.wl-clipboard;
+        };
+      };
+    };
 
     globals = {
       mapleader = " ";

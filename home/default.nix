@@ -26,7 +26,9 @@
       pkgs.rofi
       pkgs.texliveFull
       pkgs.textlint
+      pkgs.typst
       pkgs.valgrind
+      pkgs.wl-clipboard
       inputs.zig-overlay.packages.${pkgs.stdenv.hostPlatform.system}.master
     ];
   };
