@@ -5,6 +5,10 @@
       lspServersToEnable = "all";
     };
 
+    lsp-signature = {
+      enable = true;
+    };
+
     lsp = {
       enable = true;
       servers = {
