@@ -3,7 +3,8 @@
   user,
   inputs,
   ...
-}: {
+}:
+{
   home = {
     username = user;
     homeDirectory = "/home/${user}";
@@ -20,6 +21,8 @@
       pkgs.fastfetch
       pkgs.fd
       pkgs.firefox
+      pkgs.gh
+      pkgs.lean4
       pkgs.libnotify
       pkgs.networkmanagerapplet
       pkgs.ripgrep
