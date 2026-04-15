@@ -7,5 +7,18 @@
       };
       mockDevIcons = true;
     };
+    mini-diff = {
+      enable = true;
+      settings = {
+        view = {
+          style = "sign";
+          signs = {
+            add = "▎";
+            change = "▎";
+            delete = "";
+          };
+        };
+      };
+    };
   };
 }

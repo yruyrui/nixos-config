@@ -1,4 +1,8 @@
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   programs.nixvim.plugins = {
     lsp-format = {
       enable = true;
@@ -25,7 +29,10 @@
         # Tex
         texlab.enable = true;
         # Zig
-        zls.enable = true;
+        zls = {
+          enable = true;
+          package = inputs.zls.packages.${pkgs.stdenv.hostPlatform.system}.zls;
+        };
       };
     };
   };

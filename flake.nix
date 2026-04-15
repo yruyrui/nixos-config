@@ -38,6 +38,10 @@
       url = "github:mitchellh/zig-overlay";
     };
 
+    zls = {
+      url = "github:zigtools/zls";
+    };
+
     ghostty = {
       url = "github:ghostty-org/ghostty/tip"; # Latest Continuous Release
     };

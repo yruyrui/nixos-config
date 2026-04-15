@@ -27,8 +27,10 @@
       pkgs.texliveFull
       pkgs.textlint
       pkgs.typst
+      pkgs.unixtools.arp
       pkgs.valgrind
       pkgs.wl-clipboard
+      pkgs.zellij
       inputs.zig-overlay.packages.${pkgs.stdenv.hostPlatform.system}.master
     ];
   };
@@ -74,6 +76,16 @@
         port = 443;
         user = "git";
         identitiesOnly = true;
+      };
+    };
+
+    matchBlocks = {
+      "pine11" = {
+        hostname = "pine11";
+        user = "ryuto-sa";
+        setEnv = {
+          TERM = "xterm-256color";
+        };
       };
     };
   };
