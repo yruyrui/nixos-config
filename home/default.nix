@@ -24,12 +24,12 @@
       pkgs.gh
       pkgs.lean4
       pkgs.libnotify
-      pkgs.networkmanagerapplet
       pkgs.ripgrep
       pkgs.rofi
       pkgs.texliveFull
       pkgs.textlint
       pkgs.typst
+      pkgs.unzip
       pkgs.unixtools.arp
       pkgs.valgrind
       pkgs.wl-clipboard

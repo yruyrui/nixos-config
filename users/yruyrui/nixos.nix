@@ -5,7 +5,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -20,7 +21,16 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    plugins = [ pkgs.networkmanager-openvpn ];
+  };
+
+  programs = {
+    nm-applet = {
+      enable = true;
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "Asia/Tokyo";
@@ -51,6 +61,9 @@
     recommendedTlsSettings = true;
   };
 
+  services.openvpn.servers = {
+  };
+
   services.tuned = {
     enable = true;
     settings.dynamic_tuning = true;
@@ -70,13 +83,19 @@
   users.users.yruyrui = {
     isNormalUser = true;
     description = "yruyrui";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     shell = pkgs.fish;
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
   nix.settings = {
-    experimental-features = ["nix-command" "flakes"];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 
   # Allow unfree packages
