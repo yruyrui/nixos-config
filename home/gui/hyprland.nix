@@ -103,8 +103,8 @@
       };
 
       input = {
-        repeat_rate = 50;
-        repeat_delay = 300;
+        repeat_rate = 64;
+        repeat_delay = 256;
         touchpad = {
           natural_scroll = true;
         };
@@ -122,6 +122,10 @@
         "$mod, L, movefocus, r"
         "$mod, K, movefocus, u"
         "$mod, J, movefocus, d"
+        "$mod SHIFT, H, swapwindow, l"
+        "$mod SHIFT, L, swapwindow, r"
+        "$mod SHIFT, K, swapwindow, u"
+        "$mod SHIFT, J, swapwindow, d"
         "$mod, SPACE, exec, $ipc launcher toggle"
       ]
       ++ (

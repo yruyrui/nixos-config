@@ -24,6 +24,7 @@
       pkgs.gh
       pkgs.lean4
       pkgs.libnotify
+      pkgs.pdftk
       pkgs.ripgrep
       pkgs.rofi
       pkgs.texliveFull
