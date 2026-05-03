@@ -25,6 +25,7 @@
       pkgs.lean4
       pkgs.libnotify
       pkgs.pdftk
+      pkgs.python3
       pkgs.ripgrep
       pkgs.rofi
       pkgs.texliveFull
@@ -84,9 +85,9 @@
     };
 
     matchBlocks = {
-      "pine11" = {
-        hostname = "pine11";
+      "pine??" = {
         user = "ryuto-sa";
+        forwardAgent = true;
         setEnv = {
           TERM = "xterm-256color";
         };

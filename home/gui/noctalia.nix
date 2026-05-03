@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.noctalia.homeModules.default
   ];
@@ -120,6 +121,9 @@
       location = {
         monthBeforeDay = true;
         name = "Tokyo, Japan";
+      };
+      wallpaper = {
+        enabled = false;
       };
       controlCenter = {
         cards = [
