@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.nixvim = {
     defaultEditor = true;
 
@@ -36,6 +37,8 @@
 
       termguicolors = true;
       cursorline = true;
+
+      undofile = true;
     };
 
     viAlias = true;
