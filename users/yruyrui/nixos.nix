@@ -4,8 +4,12 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }:
+let
+  inherit (lib.strings) concatStringsSep;
+in
 {
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -24,6 +28,32 @@
   networking.networkmanager = {
     enable = true;
     plugins = [ pkgs.networkmanager-openvpn ];
+  };
+
+  documentation = {
+    enable = true;
+    man.enable = true;
+    dev.enable = true;
+  };
+
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      zlib
+      zstd
+      stdenv.cc.cc
+      curl
+      openssl
+      attr
+      libssh
+      bzip2
+      libxml2
+      acl
+      libsodium
+      util-linux
+      xz
+      systemd
+    ];
   };
 
   programs = {
@@ -49,6 +79,13 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
+
+  services.udev.extraRules = concatStringsSep ", " [
+    ''ACTION=="add|change"''
+    ''ATTRS{name}=="AT Translated Set 2 keyboard"''
+    ''ENV{ID_INPUT_KEYBOARD}=="1"''
+    ''ENV{LIBINPUT_IGNORE_DEVICE}="1"''
+  ];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -78,6 +115,11 @@
   services.tlp.enable = false;
 
   services.pipewire.enable = true;
+
+  services.dbus = {
+    enable = true;
+    implementation = "broker";
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.yruyrui = {

@@ -80,9 +80,6 @@
           ];
           right = [
             {
-              id = "NotificationHistory";
-            }
-            {
               formatHorizontal = "HH:mm ddd, MMM dd";
               formatVertical = "HH mm - dd MM";
               id = "Clock";

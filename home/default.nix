@@ -11,36 +11,52 @@
 
     stateVersion = "25.11";
 
-    packages = [
-      pkgs.bat
-      pkgs.btop
-      pkgs.bun
-      pkgs.clang
-      pkgs.github-copilot-cli
-      pkgs.eza
-      pkgs.fastfetch
-      pkgs.fd
-      pkgs.firefox
-      pkgs.gh
-      pkgs.lean4
-      pkgs.libnotify
-      pkgs.pdftk
-      pkgs.python3
-      pkgs.ripgrep
-      pkgs.rofi
-      pkgs.texliveFull
-      pkgs.textlint
-      pkgs.typst
-      pkgs.unzip
-      pkgs.unixtools.arp
-      pkgs.valgrind
-      pkgs.wl-clipboard
-      pkgs.zellij
-      inputs.zig-overlay.packages.${pkgs.stdenv.hostPlatform.system}.master
-    ];
+    packages =
+      with pkgs;
+      [
+        bat
+        bitwarden-desktop
+        btop
+        bun
+        clang
+        github-copilot-cli
+        gnumake
+        eza
+        fastfetch
+        fd
+        firefox
+        gh
+        lean4
+        libinput
+        libnotify
+        nkf
+        pandoc
+        pdftk
+        python3
+        ripgrep
+        rofi
+        ruff
+        texliveFull
+        textlint
+        tree
+        typst
+        unzip
+        unixtools.arp
+        uv
+        valgrind
+        wl-clipboard
+        zathura
+        zellij
+        zip
+      ]
+      ++ [
+        inputs.zig-overlay.packages.${pkgs.stdenv.hostPlatform.system}.master
+      ];
   };
 
-  programs.home-manager.enable = true;
+  programs.home-manager = {
+    enable = true;
+  };
 
   programs.git = {
     enable = true;
@@ -64,6 +80,7 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
+    includes = [ "~/.ssh/config.local" ];
 
     matchBlocks."*" = {
       forwardAgent = false;
@@ -81,16 +98,6 @@
         port = 443;
         user = "git";
         identitiesOnly = true;
-      };
-    };
-
-    matchBlocks = {
-      "pine??" = {
-        user = "ryuto-sa";
-        forwardAgent = true;
-        setEnv = {
-          TERM = "xterm-256color";
-        };
       };
     };
   };

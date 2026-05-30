@@ -38,6 +38,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+        configType = "hyprlang";
     settings = {
       "$mod" = "SUPER";
       "$ipc" = "noctalia-shell ipc call";
@@ -53,6 +54,7 @@
         "fcitx5 -d --replace &"
         "fcitx5-remote -r"
         "$terminal"
+        "sleep 2 && $ipc notifications enableDND"
       ];
 
       general = {
