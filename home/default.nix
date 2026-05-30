@@ -30,8 +30,10 @@
         libinput
         libnotify
         nkf
+        nodejs
         pandoc
         pdftk
+        pnpm
         python3
         ripgrep
         rofi
@@ -82,22 +84,29 @@
     enableDefaultConfig = false;
     includes = [ "~/.ssh/config.local" ];
 
-    matchBlocks."*" = {
-      forwardAgent = false;
-      addKeysToAgent = "yes";
-      compression = true;
-      serverAliveInterval = 0;
-      serverAliveCountMax = 3;
-      hashKnownHosts = false;
-      userKnownHostsFile = "~/.ssh/known_hosts";
-    };
+    # matchBlocks."*" = {
+    #   forwardAgent = false;
+    #   addKeysToAgent = "yes";
+    #   compression = true;
+    #   serverAliveInterval = 0;
+    #   serverAliveCountMax = 3;
+    #   hashKnownHosts = false;
+    #   userKnownHostsFile = "~/.ssh/known_hosts";
+    # };
 
-    matchBlocks = {
+    settings = {
+      "*" = {
+        ForwardAgent = false;
+        AddKeysToAgent = "yes";
+        Compression = true;
+        HashKnownHosts = false;
+        UserKnownHostsFile = "~/.ssh/known_hosts";
+      };
       "github.com" = {
-        hostname = "ssh.github.com";
-        port = 443;
-        user = "git";
-        identitiesOnly = true;
+        HostName = "ssh.github.com";
+        Port = 443;
+        User = "git";
+        IdentitiesOnly = true;
       };
     };
   };

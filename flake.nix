@@ -30,8 +30,7 @@
     };
 
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-26.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixvim";
     };
 
     zig-overlay = {
@@ -51,39 +50,42 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  } @ inputs: {
-    nixosConfigurations = {
-      thinkpad = let
-        system = "x86_64-linux";
-        user = "yruyrui";
-        specialArgs = {inherit user system inputs;};
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit system specialArgs;
-          modules = [
-            ./machines/thinkpad.nix
-            ./users/${user}/nixos.nix
-            ./modules/gui/niri.nix
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations = {
+        thinkpad =
+          let
+            system = "x86_64-linux";
+            user = "yruyrui";
+            specialArgs = { inherit user system inputs; };
+          in
+          nixpkgs.lib.nixosSystem {
+            inherit system specialArgs;
+            modules = [
+              ./machines/thinkpad.nix
+              ./users/${user}/nixos.nix
+              ./modules/gui/niri.nix
 
-            {
-              modules.gui.niri.enable = true;
-            }
+              {
+                modules.gui.niri.enable = true;
+              }
 
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = inputs // specialArgs;
-              home-manager.users.${user} = import ./users/${user}/home.nix;
-            }
-          ];
-        };
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = inputs // specialArgs;
+                home-manager.users.${user} = import ./users/${user}/home.nix;
+              }
+            ];
+          };
+      };
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
     };
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
-  };
 }
