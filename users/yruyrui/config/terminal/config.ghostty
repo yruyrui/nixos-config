@@ -1,0 +1,8 @@
+theme = Modus Vivendi
+
+window-decoration = false
+
+confirm-close-surface = false
+
+clipboard-read = allow
+clipboard-write = allow
