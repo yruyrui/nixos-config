@@ -32,9 +32,8 @@
   xdg.configFile =
     builtins.foldl' (acc: name: acc // { "${name}".text = builtins.readFile ../config/${name}; }) { }
       [
-
+        "terminal/config.ghostty"
         "niri/config.kdl"
-
         "noctalia/config.toml"
       ];
 
@@ -44,6 +43,7 @@
       btop
       clang-tools
       cmake
+      cmake-language-server
       fastfetch
       fd
       nix-diff
@@ -56,11 +56,29 @@
       watch
       zellij
     ]
-    ++ [
-      inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
+    ++ (with inputs; [
+      ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
+      nil.packages.${pkgs.stdenv.hostPlatform.system}.default
+    ])
+    ++ (with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
+      opencode
+      opencode2
+      openresearch
+    ]);
+
+  programs.firefox = {
+    enable = true;
+    package = pkgs.firefox-devedition;
+    globalExtensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      privacy-badger
+      {
+        package = ublock-origin;
+        settings = {
+          private_browsing = true;
+        };
+      }
     ];
-
-  programs.firefox.enable = true;
-
+  };
+  
   home.stateVersion = "26.05";
 }

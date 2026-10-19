@@ -32,6 +32,11 @@
   networking.networkmanager.enable = true;
   networking.wireless.enable = true;
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+  ];
+
+  
   # Set your time zone.
   time.timeZone = "Asia/Tokyo";
 
@@ -107,7 +112,6 @@
       gnumake
       mako
       miktex
-      opencode
       openssl
       polkit
       ripgrep
@@ -123,7 +127,6 @@
     ];
   };
 
-  # programs.firefox.enable = true;
   programs.git = {
     enable = true;
     config = {

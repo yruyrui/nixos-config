@@ -39,6 +39,8 @@ in systemFunc rec {
 
     # Allow unfree packages.
     { nixpkgs.config.allowUnfree = true; }
+
+    inputs.nur.modules.nixos.default
   ] ++ optionals isWSL [
     inputs.nixos-wsl.nixosModules.wsl
   ] ++ optionals isLinux [

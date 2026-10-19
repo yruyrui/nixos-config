@@ -47,14 +47,60 @@
 (define-key global-map (kbd "<f5>") #'modus-themes-toggle)
 
 ;; LSP
+
+(leaf cmake-mode :ensure t)
+(leaf nix-mode :ensure t)
+
 (leaf eglot
+  :ensure t
+  :config
+  (add-to-list 'eglot-server-programs '(nix-mode . ("nil")))
   :hook
   (c-mode . eglot-ensure)
   (c++-mode . eglot-ensure)
+  (cmake-mode . eglot-ensure)
   (html-mode . eglot-ensure)
+  (nix-mode . eglot-ensure)
   (python-mode . eglot-ensure)
-  (typescript-mode . eglot-ensure)
-  )
+  (sh-mode . eglot-ensure)
+  (typescript-mode . eglot-ensure))
+
+
+(leaf company
+  :doc "Modular text completion framework"
+  :req "emacs-24.3"
+  :tag "matching" "convenience" "abbrev" "emacs>=24.3"
+  :url "http://company-mode.github.io/"
+  :emacs>= 24.3
+  :ensure t
+  :blackout t
+  :leaf-defer nil
+  :bind ((company-active-map
+          ("M-n" . nil)
+          ("M-p" . nil)
+          ("C-s" . company-filter-candidates)
+          ("C-n" . company-select-next)
+          ("C-p" . company-select-previous)
+          ("<tab>" . company-complete-selection))
+         (company-search-map
+          ("C-n" . company-select-next)
+          ("C-p" . company-select-previous)))
+  :custom ((company-idle-delay . 0)
+           (company-minimum-prefix-length . 1)
+           (company-transformers . '(company-sort-by-occurrence)))
+  :global-minor-mode global-company-mode)
+
+(leaf company-c-headers
+  :doc "Company mode backend for C/C++ header files"
+  :req "emacs-24.1" "company-0.8"
+  :tag "company" "development" "emacs>=24.1"
+  :added "2020-03-25"
+  :emacs>= 24.1
+  :ensure t
+  :after company
+  :defvar company-backends
+  :config
+  (add-to-list 'company-backends 'company-c-headers))
 
 
 (provide 'init)
