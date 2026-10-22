@@ -32,7 +32,7 @@
   xdg.configFile =
     builtins.foldl' (acc: name: acc // { "${name}".text = builtins.readFile ../config/${name}; }) { }
       [
-        "terminal/config.ghostty"
+        "ghostty/config.ghostty"
         "niri/config.kdl"
         "noctalia/config.toml"
       ];

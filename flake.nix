@@ -43,10 +43,6 @@
       url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # snapd
-    nix-snapd.url = "github:nix-community/nix-snapd";
-    nix-snapd.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, ... }@inputs: let 
